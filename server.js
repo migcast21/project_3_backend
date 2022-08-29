@@ -5,6 +5,14 @@ require('dotenv').config()
 const Travels = require('./models/travels.js');
 const cors = require('cors');
 
+const PORT = process.env.PORT || 3003;
+const MONGODB_URI  = process.env.MONGODB_URI
+const db = mongoose.connection
+
+db.on('error', (err) => console.log(err.message + ' is Mongod not running?'));
+db.on('connected', () => console.log('mongo connected: ', MONGODB_URI));
+db.on('disconnected', () => console.log('mongo disconnected'));
+
 //create route
 app.post('/travels', (req, res) => {
     Travels.create(req.body, (err, createdTravel) => {
@@ -46,9 +54,4 @@ mongoose.connection.once('open', () => {
 
 console.log(process.env)
 
-const MONGODB_URI  = process.env.MONGODB_URI 
-const db = mongoose.connection
 
-db.on('error', (err) => console.log(err.message + ' is Mongod not running?'));
-db.on('connected', () => console.log('mongo connected: ', MONGODB_URI));
-db.on('disconnected', () => console.log('mongo disconnected'));
