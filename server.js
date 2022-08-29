@@ -47,7 +47,9 @@ app.listen(3000, () => {
     console.log('listening...')
 })
 
-mongoose.connect('mongodb://localhost:27017/travel')
+mongoose.connect(MONGODB_URI, () => {
+    console.log('whatever')
+})
 mongoose.connection.once('open', () => {
     console.log('connected to mongod...');
 })
