@@ -28,7 +28,7 @@ app.post('/travels', (req, res) => {
     });
 });
 app.get('/' , (req, res) => {
-    res.send('Hello World!');
+    res.send('Hello World');
   });
 //index route
 app.get('/travels', (req, res) => {
@@ -56,6 +56,3 @@ mongoose.connect(MONGODB_URI, () => {
 mongoose.connection.once('open', () => {
     console.log('connected to mongod...');
 })
-
-
-
