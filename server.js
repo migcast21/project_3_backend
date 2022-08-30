@@ -28,7 +28,7 @@ app.post('/travels', (req, res) => {
     });
 });
 app.get('/' , (req, res) => {
-    res.send('Hello World');
+    res.send('Express Backend Heroku');
   });
 //index route
 app.get('/travels', (req, res) => {
