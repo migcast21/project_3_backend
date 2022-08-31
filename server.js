@@ -5,7 +5,8 @@ const mongoose = require('mongoose');
 require('dotenv').config()
 const Travels = require('./models/travels.js');
 const cors = require('cors');
-const db = mongoose.connection
+const db = mongoose.connection;
+const LosAngeles = require('./models/losAngeles.js');
 
 //middleware//
 app.use(cors());
@@ -21,6 +22,7 @@ db.on('error', (err) => console.log(err.message + ' is Mongod not running?'));
 db.on('connected', () => console.log('mongo connected: ', MONGODB_URI));
 db.on('disconnected', () => console.log('mongo disconnected'));
 
+//BOSTON BELOW//
 //create route
 app.post('/travels', (req, res) => {
     Travels.create(req.body, (err, createdTravel) => {
@@ -46,6 +48,33 @@ app.delete('/travels/:id', (req, res) => {
 app.put('/travels/:id', (req, res) => {
     Travels.findByIdAndUpdate(req.params.id, req.body, {new:true}, (err, updatedTravel) => {
         res.json(updatedTravel);
+    });
+});
+
+//LOS ANGELES BELOW//
+//create route
+app.post('/losAngeles', (req, res) => {
+    LosAngeles.create(req.body, (err, createdLosAngeles) => {
+        res.json(createdLosAngeles);
+    });
+});
+
+//index route
+app.get('/losAngeles', (req, res) => {
+    LosAngeles.find({}, (err, foundLosAngeles) => {
+        res.json(foundLosAngeles);
+    });
+});
+//delete route
+app.delete('/losAngeles/:id', (req, res) => {
+    LosAngeles.findByIdAndRemove(req.params.id, (err, deletedLosAngeles) => {
+        res.json(deletedLosAngeles);
+    });
+});
+//edit route
+app.put('/losAngeles/:id', (req, res) => {
+    LosAngeles.findByIdAndUpdate(req.params.id, req.body, {new:true}, (err, updatedLosAngeles) => {
+        res.json(updatedLosAngeles);
     });
 });
 
